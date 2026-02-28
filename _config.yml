@@ -1,0 +1,61 @@
+# ─── Ghostvyle Blog ───
+title: Ghostvyle
+description: "Offensive Security · Development · Research"
+author: Ghostvyle
+url: "https://ghostvyle.github.io"
+baseurl: ""
+
+# Build
+markdown: kramdown
+highlighter: rouge
+
+# Collections
+collections:
+  pages:
+    output: true
+  blog:
+    output: true
+    permalink: /blog/:path/
+  projects:
+    output: true
+    permalink: /projects/:path/
+  writeups:
+    output: true
+    permalink: /writeups/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: "post"
+      author: "Ghostvyle"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "post"
+      author: "Ghostvyle"
+  - scope:
+      path: ""
+      type: "writeups"
+    values:
+      layout: "post"
+      author: "Ghostvyle"
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE

@@ -1,0 +1,64 @@
+---
+layout: default
+---
+
+<div class="wrapper">
+
+  <section class="hero hero--home">
+    <div class="hero__tag">home</div>
+    <h1 class="hero__title">ghostvyle<br><em>web</em></h1>
+    <p class="hero__subtitle">Documentación técnica en seguridad ofensiva, investigación y desarrollo de herramientas.
+    </p>
+  </section>
+
+  <section class="landing-sections">
+    <a href="{{ '/blog/' | relative_url }}" class="landing-card">
+      <div class="landing-card__icon">📝</div>
+      <h3>Blog</h3>
+      <p>Técnicas ofensivas, herramientas y análisis técnico.</p>
+      <span class="landing-card__link">Ir al blog →</span>
+    </a>
+    <a href="{{ '/projects/' | relative_url }}" class="landing-card">
+      <div class="landing-card__icon">⚙️</div>
+      <h3>Projects</h3>
+      <p>Herramientas de seguridad ofensiva: Unburden, RacoonX y más.</p>
+      <span class="landing-card__link">Ver proyectos →</span>
+    </a>
+    <a href="{{ '/writeups/' | relative_url }}" class="landing-card">
+      <div class="landing-card__icon">📋</div>
+      <h3>Writeups</h3>
+      <p>HTB, CTFs y laboratorios. Proceso completo desde reconocimiento hasta root.</p>
+      <span class="landing-card__link">Ver writeups →</span>
+    </a>
+  </section>
+
+  <section class="recent-posts">
+    <div class="section-header">
+      <h2 class="section-title">Últimas entradas</h2>
+      <a href="{{ '/blog/' | relative_url }}" class="section-link">Ver todo →</a>
+    </div>
+    <div class="posts">
+      {% assign all_entries = site.blog | concat: site.projects | concat: site.writeups %}
+      {% assign recent = all_entries | where_exp: "p", "p.layout != 'exploits'" | sort: "date" | reverse | limit: 3 %}
+      {% for post in recent %}
+      <a href="{{ post.card_url | default: post.url | relative_url }}" class="post-card" data-category="{{ post.category }}">
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <span class="post-card__category">{{ post.category }}</span>
+            <span class="post-card__date">{{ post.date | date: "%d %b %Y" }}</span>
+          </div>
+          <h2 class="post-card__title">{{ post.title }}</h2>
+          <p class="post-card__excerpt">{{ post.resumen | default: post.excerpt | strip_html | truncatewords: 22 }}</p>
+          <div class="post-card__tags">
+            {% for tag in post.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <span class="post-card__arrow">→</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+</div>

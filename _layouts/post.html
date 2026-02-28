@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+<div class="wrapper">
+
+  <header class="post-header">
+    {% if page.category == "Writeup" %}
+    <a href="{{ '/writeups/' | relative_url }}" class="post-header__back">← Writeups</a>
+    {% else %}
+    <a href="{{ '/blog/' | relative_url }}" class="post-header__back">← Blog</a>
+    {% endif %}
+    <h1 class="post-header__title">{{ page.title }}</h1>
+    <div class="post-header__info">
+      <span class="post-date">{{ page.date | date: "%d %B %Y" }}</span>
+      <span class="post-dot">◆</span>
+      <span class="post-card__category">{{ page.category }}</span>
+      {% if page.tags.size > 0 %}
+      <span class="post-dot">◆</span>
+      <div class="post-header__tags">
+        {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if page.has_exploits %}
+      <a href="{{ page.exploits_url | relative_url }}" class="post-exploits-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+        // Exploits
+      </a>
+      {% endif %}
+    </div>
+  </header>
+
+  <article class="post-content">
+    {{ content }}
+  </article>
+
+</div>

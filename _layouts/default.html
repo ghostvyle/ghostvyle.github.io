@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncatewords: 50 }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" type="image/png" href="{{ '/assets/logo.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/logo.png' | relative_url }}">
+  {% seo %}
+</head>
+<body>
+
+  {% include nav.html %}
+
+  <main>
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  <script>
+    const socialsToggle = document.querySelector('.nav__socials-toggle');
+    const socialsMenu = document.querySelector('.nav__socials');
+    if (socialsToggle) {
+      socialsToggle.addEventListener('click', e => {
+        e.stopPropagation();
+        socialsMenu.classList.toggle('open');
+      });
+      document.addEventListener('click', () => socialsMenu.classList.remove('open'));
+    }
+  </script>
+
+</body>
+</html>
