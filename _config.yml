@@ -1,9 +1,11 @@
 # ─── Ghostvyle Blog ───
 title: Ghostvyle
-description: "Offensive Security · Development · Research"
+description: "Offensive Security · Writeups · Projects · Technical articles"
 author: Ghostvyle
 url: "https://ghostvyle.github.io"
 baseurl: ""
+logo: /assets/logo.png
+image: /assets/og-image.png?v=20260303-1
 
 # Build
 markdown: kramdown
@@ -51,7 +53,6 @@ defaults:
 
 # Plugins
 plugins:
-  - jekyll-seo-tag
   - jekyll-sitemap
 
 # Exclude
