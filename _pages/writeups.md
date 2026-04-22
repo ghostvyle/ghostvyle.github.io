@@ -53,9 +53,32 @@ permalink: /writeups/
       <div class="writeup-os-header">
         <span class="writeup-os-icon">🪟</span>
         <h2>Windows</h2>
-        <span class="writeup-os-count writeup-os-count--soon">Próximamente</span>
+        {% assign windows_writeups = site.writeups | where: "os", "Windows" %}
+        <span class="writeup-os-count">{{ windows_writeups.size }} máquina{% if windows_writeups.size != 1 %}s{% endif %}</span>
       </div>
+      {% if windows_writeups.size > 0 %}
+      <div class="writeup-list">
+        {% for post in windows_writeups %}
+        <a href="{{ post.url | relative_url }}" class="writeup-entry" data-title="{{ post.title | downcase }}" data-tags="{{ post.tags | join: ',' | downcase }}" data-os="windows">
+          <div class="writeup-entry__left">
+            <span class="writeup-entry__name">{{ post.title | remove: "HTB Writeup: " }}</span>
+            <div class="writeup-entry__tags">
+              <span class="badge badge--platform">{{ post.platform | default: "HackTheBox" }}</span>
+              <span class="badge badge--difficulty badge--{{ post.difficulty | downcase | default: 'easy' }}">{{ post.difficulty | default: "Easy" }}</span>
+              {% for tag in post.tags %}
+                {% unless tag == "htb" or tag == "linux" or tag == "windows" or tag == "easy" or tag == "medium" or tag == "hard" %}
+                <span class="badge badge--vuln">{{ tag }}</span>
+                {% endunless %}
+              {% endfor %}
+            </div>
+          </div>
+          <span class="writeup-entry__arrow">→</span>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
       <p class="writeup-empty">Las máquinas Windows están en camino.</p>
+      {% endif %}
     </div>
 
   </section>
