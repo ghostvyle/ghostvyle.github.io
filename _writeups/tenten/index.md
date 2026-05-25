@@ -8,7 +8,7 @@ tags: [htb, linux, medium, wordpress, job-manager, cve-2015-6668, idor, steganog
 platform: HackTheBox
 os: Linux
 difficulty: Medium
-has_exploits: true
+has_exploits: false
 exploits_url: /writeups/tenten/exploit/
 resumen: "WordPress con el plugin Job Manager vulnerable a CVE-2015-6668: enumeración de IDs de oferta para localizar una oferta oculta y su adjunto accesible por ruta predecible en /wp-content/uploads/. Esteganografía con steghide para extraer una clave SSH del JPG, crackeo de la passphrase con john y acceso como takis. Escalada a root vía sudo sobre un wrapper /bin/fuckin."
 permalink: /writeups/tenten/
