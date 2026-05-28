@@ -314,11 +314,13 @@ Obtenemos los hashes de `root`, `app-dev`, `monitor` y `steve` — confirmación
 tac /root/root.txt | tac
 ```
 
-![tac /root/root.txt | tac revela la flag de root](/writeups/waldo/assets/24_tac_root_flag.png)
 
 ```
 763ba291a14a52c7c3a3bc3dfc7ca330
 ```
+
+
+
 
 ---
 
