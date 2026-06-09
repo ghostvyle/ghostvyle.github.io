@@ -31,7 +31,7 @@ permalink: /projects/
         <span class="tag">automation</span>
         <span class="tag">osint</span>
       </div>
-      <a href="{{ '/projects/unburden/' | relative_url }}" class="project-card__github" style="display:inline-block; margin-top:1rem;">Leer memoria (TFG) →</a>
+      <a href="{{ '/projects/unburden/' | relative_url }}" class="project-card__github" style="display:inline-block; margin-top:1rem;">Memoria Unburden →</a>
     </article>
 
     <article class="project-card">

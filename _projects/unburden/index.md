@@ -1,9 +1,8 @@
 ---
 layout: post
 permalink: /projects/unburden/
-card_url: /projects/
 title: "Unburden"
-date: 2026-01-15
+date: 2026-06-09
 category: projects
 tags: [llm, mcp, pentesting, automation, osint]
 resumen: "Asistente de pentesting autónomo que integra un LLM local con servidores MCP para automatizar reconocimiento, análisis y flujos de trabajo de seguridad ofensiva."
@@ -46,7 +45,7 @@ El documento recoge todo el proyecto: la motivación, el estado del arte, el dis
       </svg>
     </span>
     <div style="flex:1 1 auto;min-width:0;">
-      <div class="ub-doc__title">Memoria del Trabajo de Fin de Grado</div>
+      <div class="ub-doc__title">Memoria Unburden</div>
       <div class="ub-doc__meta">Unburden_TFG.pdf · 95 páginas · 6,8 MB</div>
     </div>
     <div class="ub-doc__tools">
@@ -142,24 +141,37 @@ El documento recoge todo el proyecto: la motivación, el estado del arte, el dis
         holders.push(el);
       }
       observe();
-      // Mantener la página que se estaba viendo tras un re-render.
+      // Restaurar la posición a la página que se veía (sin mover la ventana). En carga: portada.
       var t = holders[anchor - 1];
-      if (t) t.scrollIntoView({ block: 'start' });
+      pagesEl.scrollTop = (anchor <= 1 || !t) ? 0 : Math.max(0, t.offsetTop - 16);
+      updateCurrent();
       building = false;
     }
 
+    // El observer SOLO carga páginas de forma perezosa (con margen amplio por delante).
     function observe() {
       io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          var n = +e.target.dataset.page;
-          render(n, e.target);
-          current = n;
-          if (pageEl) pageEl.textContent = n;
+          if (e.isIntersecting) render(+e.target.dataset.page, e.target);
         });
-      }, { root: pagesEl, rootMargin: '400px 0px', threshold: 0.01 });
+      }, { root: pagesEl, rootMargin: '600px 0px', threshold: 0 });
       holders.forEach(function (el) { io.observe(el); });
     }
+
+    // La página actual se deduce de la posición real del scroll, no del observer.
+    function updateCurrent() {
+      var ref = pagesEl.scrollTop + 40;
+      var n = 1;
+      for (var i = 0; i < holders.length; i++) {
+        if (holders[i].offsetTop <= ref) n = i + 1; else break;
+      }
+      current = n;
+      if (pageEl) pageEl.textContent = n;
+    }
+    var scrollT;
+    pagesEl.addEventListener('scroll', function () {
+      clearTimeout(scrollT); scrollT = setTimeout(updateCurrent, 60);
+    });
 
     function render(n, holder) {
       if (rendered[n]) return;
@@ -192,15 +204,17 @@ El documento recoge todo el proyecto: la motivación, el estado del arte, el dis
     // Re-render fiable ante cambios de tamaño O zoom del navegador (Ctrl +/−),
     // que alteran el ancho disponible y/o la densidad de pantalla.
     function watch() {
-      var t;
+      var t, first = true;
       function relayout() {
         if (building) return;
         if (Math.abs(pagesEl.clientWidth - lastWidth) < 2) return; // evita bucles por scrollbar
         build();
       }
       if (window.ResizeObserver) {
-        new ResizeObserver(function () { clearTimeout(t); t = setTimeout(relayout, 150); })
-          .observe(pagesEl);
+        new ResizeObserver(function () {
+          if (first) { first = false; lastWidth = pagesEl.clientWidth; return; } // ignora el disparo inicial
+          clearTimeout(t); t = setTimeout(relayout, 150);
+        }).observe(pagesEl);
       } else {
         window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(relayout, 150); });
       }
