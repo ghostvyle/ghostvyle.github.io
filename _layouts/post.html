@@ -5,8 +5,10 @@ layout: default
 <div class="wrapper">
 
   <header class="post-header">
-    {% if page.category == "Writeup" %}
+    {% if page.category == "writeups" %}
     <a href="{{ '/writeups/' | relative_url }}" class="post-header__back">← Writeups</a>
+    {% elsif page.category == "projects" %}
+    <a href="{{ '/projects/' | relative_url }}" class="post-header__back">← Projects</a>
     {% else %}
     <a href="{{ '/blog/' | relative_url }}" class="post-header__back">← Blog</a>
     {% endif %}

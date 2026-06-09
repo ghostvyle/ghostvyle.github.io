@@ -22,7 +22,7 @@ permalink: /projects/
         </div>
         <a href="https://github.com/ghostvyle/Unburden" target="_blank" rel="noopener" class="project-card__github">GitHub ↗</a>
       </div>
-      <h2 class="project-card__name">Unburden</h2>
+      <h2 class="project-card__name"><a href="{{ '/projects/unburden/' | relative_url }}" style="color:inherit; text-decoration:none;">Unburden</a></h2>
       <p class="project-card__desc">Asistente de pentesting autónomo que integra un LLM local con servidores MCP para automatizar reconocimiento, análisis y flujos de trabajo de seguridad ofensiva.</p>
       <div class="project-card__topics">
         <span class="tag">llm</span>
@@ -31,6 +31,7 @@ permalink: /projects/
         <span class="tag">automation</span>
         <span class="tag">osint</span>
       </div>
+      <a href="{{ '/projects/unburden/' | relative_url }}" class="project-card__github" style="display:inline-block; margin-top:1rem;">Leer memoria (TFG) →</a>
     </article>
 
     <article class="project-card">
